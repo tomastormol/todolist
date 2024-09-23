@@ -35,7 +35,7 @@ struct TodoView: View {
             .background(Color.backgroundApp)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("Todo")
+                    Text("Tareas")
                         .font(.title)
                         .bold()
                         .foregroundColor(.colorRed)
@@ -118,12 +118,12 @@ struct AddTaskView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("", text: $newTask, prompt: Text("Write new Todo")
+                TextField("", text: $newTask, prompt: Text("Escribe aquí la tarea")
                     .foregroundColor(.gray) // Texto de placeholder más suave
                 )
                 .foregroundColor(.white) // Color del texto introducido
                 .padding()
-                .background(Color.black.opacity(0.8)) // Fondo del TextField más oscuro
+                .background(Color.black.opacity(0.3)) // Fondo del TextField más oscuro
                 .cornerRadius(10) // Bordes redondeados para un look más moderno
 
                 Button(action: {
@@ -133,7 +133,7 @@ struct AddTaskView: View {
                     isAddingTask = false // Ocultar el formulario
                 }) {
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(Color.black.opacity(0.8))
+                        .foregroundColor(Color.gray.opacity(0.8))
                         .font(.title)
                 }
                 .padding(.leading, 8)
@@ -141,7 +141,7 @@ struct AddTaskView: View {
             .padding(.vertical, 8)
 
             // Personalizar la apariencia del DatePicker
-            DatePicker("Date & Time", selection: $taskDate, displayedComponents: [.date, .hourAndMinute])
+            DatePicker("Fecha y Hora", selection: $taskDate, displayedComponents: [.date, .hourAndMinute])
                 .datePickerStyle(CompactDatePickerStyle())
                 .cornerRadius(10)
                 .accentColor(.gray) // Color del selector
@@ -159,7 +159,7 @@ struct AddTodoTaskButton: View {
                 isAddingTask.toggle() // Mostrar u ocultar el formulario
             }) {
                 Image(systemName: "plus.circle.fill")
-                Text("New Reminder")
+                Text("Nueva tarea")
             }
             .padding(8)
             .foregroundColor(.colorRed)
