@@ -114,9 +114,18 @@ struct AddTaskView: View {
     var taskManager: TaskManager
     var scheduleNotification: (String, Date) -> Void
     @Binding var isAddingTask: Bool
+    @State private var errorMessage: String? = nil
 
     var body: some View {
         VStack {
+            
+            if let errorMessage = errorMessage{
+                Text(errorMessage)
+                    .foregroundColor(Color.colorRed)
+                    .font(.caption)
+                    .padding(.top, 4)
+            }
+            
             HStack {
                 TextField("", text: $newTask, prompt: Text("Escribe aquí la tarea")
                     .foregroundColor(.gray) // Texto de placeholder más suave
@@ -127,10 +136,15 @@ struct AddTaskView: View {
                 .cornerRadius(10) // Bordes redondeados para un look más moderno
 
                 Button(action: {
-                    taskManager.addTask(title: newTask, date: taskDate) // Usar addTask del TaskManager
-                    scheduleNotification(newTask, taskDate) // Programar notificación
-                    newTask = "" // Limpiar el campo de texto
-                    isAddingTask = false // Ocultar el formulario
+                    if newTask.isEmpty {
+                        errorMessage = "Debes escribir una tarea"
+                    }else {
+                        taskManager.addTask(title: newTask, date: taskDate) // Usar addTask del TaskManager
+                        scheduleNotification(newTask, taskDate) // Programar notificación
+                        newTask = "" // Limpiar el campo de texto
+                        isAddingTask = false // Ocultar el formulario
+                        errorMessage = nil
+                    }
                 }) {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(Color.gray.opacity(0.8))

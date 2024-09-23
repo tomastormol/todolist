@@ -24,9 +24,11 @@ class TaskManager: ObservableObject {
 
     // Añadir una nueva tarea y guardarla
     func addTask(title: String, date: Date) {
-        let task = TodoTask(title: title, date: date)
-        tasks.append(task)
-        saveTasks()
+        if !title.isEmpty {
+            let task = TodoTask(title: title, date: date)
+            tasks.append(task)
+            saveTasks()
+        }
     }
 
     // Eliminar una tarea y guardar
