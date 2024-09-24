@@ -61,8 +61,8 @@ struct TodoView: View {
     func scheduleNotification(for task: String, date: Date) {
         let content = UNMutableNotificationContent()
         content.title = "Recordatorio"
-        content.body = "No olvides: \(task)"
-        content.sound = .default
+        content.body = task
+        content.sound = .defaultCritical
 
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
