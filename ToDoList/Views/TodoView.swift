@@ -19,7 +19,13 @@ struct TodoView: View {
                     }
                     
                     if isAddingTask {
-                        AddTaskView(newTask: $newTask, taskDate: $taskDate, taskManager: taskManager, scheduleNotification: scheduleNotification, isAddingTask: $isAddingTask)
+                        AddTaskView(
+                            newTask: $newTask,
+                            taskDate: $taskDate,
+                            taskManager: taskManager,
+                            scheduleNotification: scheduleNotification,
+                            isAddingTask: $isAddingTask)
+                        .listRowBackground(Color.clear)
                     }
                 }
                 .listStyle(.plain)
